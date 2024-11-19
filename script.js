@@ -82,9 +82,43 @@
     
 // BONUS
 
-const boutton = document.querySelector('#button');
-button = addEventListener('click', Handleimage);
+const bouton = document.querySelector('.btnCarousel');
+const images = document.querySelectorAll('.imgCarousel');
+const divLeft = document.querySelector('#divLeft');
+const divRight = document.querySelector('#divRight');
 
-function Handleimage(){
-    
+let currentIndex = 0;
+
+function HandleImages() {
+  images.forEach(image => {
+    image.classList.remove('show');
+  });
 }
+
+function HandleImageCarousel() {
+  HandleImages();
+  images[currentIndex].classList.add('show');
+}
+
+bouton.addEventListener('click', function() {
+  HandleImageCarousel();
+});
+
+divLeft.addEventListener('click', function() {
+    if (currentIndex === 0) {
+      currentIndex = images.length - 1; // Si on est à la première image, on revient à la dernière
+    } else {
+      currentIndex = currentIndex - 1; // Sinon, on passe à l'image précédente
+    }
+    HandleImageCarousel();
+  });
+  
+  divRight.addEventListener('click', function() {
+    if (currentIndex === images.length - 1) {
+      currentIndex = 0; // Si on est à la dernière image, on revient à la première
+    } else {
+      currentIndex = currentIndex + 1; // Sinon, on passe à l'image suivante
+    }
+    HandleImageCarousel();
+  });
+  
